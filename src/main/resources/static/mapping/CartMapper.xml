@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aimei.beautyshop.dao.CartMapper">
+  <resultMap id="BaseResultMap" type="com.aimei.beautyshop.entity.Cart">
+    <id column="cartid" jdbcType="INTEGER" property="cartid" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="goodsdetid" jdbcType="INTEGER" property="goodsdetid" />
+    <result column="goodsnum" jdbcType="DOUBLE" property="goodsnum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cartid, userid, goodsdetid, goodsnum
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_cart
+    where cartid = #{cartid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_cart
+    where cartid = #{cartid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.aimei.beautyshop.entity.Cart">
+    insert into t_cart (cartid, userid, goodsdetid, 
+      goodsnum)
+    values (#{cartid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{goodsdetid,jdbcType=INTEGER}, 
+      #{goodsnum,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aimei.beautyshop.entity.Cart">
+    insert into t_cart
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cartid != null">
+        cartid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="goodsdetid != null">
+        goodsdetid,
+      </if>
+      <if test="goodsnum != null">
+        goodsnum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cartid != null">
+        #{cartid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsdetid != null">
+        #{goodsdetid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsnum != null">
+        #{goodsnum,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aimei.beautyshop.entity.Cart">
+    update t_cart
+    <set>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsdetid != null">
+        goodsdetid = #{goodsdetid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsnum != null">
+        goodsnum = #{goodsnum,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where cartid = #{cartid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aimei.beautyshop.entity.Cart">
+    update t_cart
+    set userid = #{userid,jdbcType=INTEGER},
+      goodsdetid = #{goodsdetid,jdbcType=INTEGER},
+      goodsnum = #{goodsnum,jdbcType=DOUBLE}
+    where cartid = #{cartid,jdbcType=INTEGER}
+  </update>
+</mapper>

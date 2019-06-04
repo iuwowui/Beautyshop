@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aimei.beautyshop.dao.AddressMapper">
+  <resultMap id="BaseResultMap" type="com.aimei.beautyshop.entity.Address">
+    <id column="addrid" jdbcType="INTEGER" property="addrid" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="linkman" jdbcType="VARCHAR" property="linkman" />
+    <result column="linkphone" jdbcType="VARCHAR" property="linkphone" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    addrid, address, linkman, linkphone, userid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_address
+    where addrid = #{addrid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_address
+    where addrid = #{addrid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.aimei.beautyshop.entity.Address">
+    insert into t_address (addrid, address, linkman, 
+      linkphone, userid)
+    values (#{addrid,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{linkman,jdbcType=VARCHAR}, 
+      #{linkphone,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aimei.beautyshop.entity.Address">
+    insert into t_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="addrid != null">
+        addrid,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="linkman != null">
+        linkman,
+      </if>
+      <if test="linkphone != null">
+        linkphone,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="addrid != null">
+        #{addrid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null">
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="linkphone != null">
+        #{linkphone,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aimei.beautyshop.entity.Address">
+    update t_address
+    <set>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null">
+        linkman = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="linkphone != null">
+        linkphone = #{linkphone,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where addrid = #{addrid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aimei.beautyshop.entity.Address">
+    update t_address
+    set address = #{address,jdbcType=VARCHAR},
+      linkman = #{linkman,jdbcType=VARCHAR},
+      linkphone = #{linkphone,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=INTEGER}
+    where addrid = #{addrid,jdbcType=INTEGER}
+  </update>
+</mapper>

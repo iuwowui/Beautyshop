@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aimei.beautyshop.dao.CouponMapper">
+  <resultMap id="BaseResultMap" type="com.aimei.beautyshop.entity.Coupon">
+    <id column="couponid" jdbcType="INTEGER" property="couponid" />
+    <result column="begintimedatatime" jdbcType="TIMESTAMP" property="begintimedatatime" />
+    <result column="endtime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="coupondesc" jdbcType="VARCHAR" property="coupondesc" />
+    <result column="couponmoney" jdbcType="INTEGER" property="couponmoney" />
+    <result column="couponstatus" jdbcType="INTEGER" property="couponstatus" />
+    <result column="minicoupon" jdbcType="INTEGER" property="minicoupon" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    couponid, begintimedatatime, endtime, coupondesc, couponmoney, couponstatus, minicoupon, 
+    userid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_coupon
+    where couponid = #{couponid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_coupon
+    where couponid = #{couponid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.aimei.beautyshop.entity.Coupon">
+    insert into t_coupon (couponid, begintimedatatime, endtime, 
+      coupondesc, couponmoney, couponstatus, 
+      minicoupon, userid)
+    values (#{couponid,jdbcType=INTEGER}, #{begintimedatatime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{coupondesc,jdbcType=VARCHAR}, #{couponmoney,jdbcType=INTEGER}, #{couponstatus,jdbcType=INTEGER}, 
+      #{minicoupon,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aimei.beautyshop.entity.Coupon">
+    insert into t_coupon
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="couponid != null">
+        couponid,
+      </if>
+      <if test="begintimedatatime != null">
+        begintimedatatime,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+      <if test="coupondesc != null">
+        coupondesc,
+      </if>
+      <if test="couponmoney != null">
+        couponmoney,
+      </if>
+      <if test="couponstatus != null">
+        couponstatus,
+      </if>
+      <if test="minicoupon != null">
+        minicoupon,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="couponid != null">
+        #{couponid,jdbcType=INTEGER},
+      </if>
+      <if test="begintimedatatime != null">
+        #{begintimedatatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coupondesc != null">
+        #{coupondesc,jdbcType=VARCHAR},
+      </if>
+      <if test="couponmoney != null">
+        #{couponmoney,jdbcType=INTEGER},
+      </if>
+      <if test="couponstatus != null">
+        #{couponstatus,jdbcType=INTEGER},
+      </if>
+      <if test="minicoupon != null">
+        #{minicoupon,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aimei.beautyshop.entity.Coupon">
+    update t_coupon
+    <set>
+      <if test="begintimedatatime != null">
+        begintimedatatime = #{begintimedatatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coupondesc != null">
+        coupondesc = #{coupondesc,jdbcType=VARCHAR},
+      </if>
+      <if test="couponmoney != null">
+        couponmoney = #{couponmoney,jdbcType=INTEGER},
+      </if>
+      <if test="couponstatus != null">
+        couponstatus = #{couponstatus,jdbcType=INTEGER},
+      </if>
+      <if test="minicoupon != null">
+        minicoupon = #{minicoupon,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where couponid = #{couponid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aimei.beautyshop.entity.Coupon">
+    update t_coupon
+    set begintimedatatime = #{begintimedatatime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      coupondesc = #{coupondesc,jdbcType=VARCHAR},
+      couponmoney = #{couponmoney,jdbcType=INTEGER},
+      couponstatus = #{couponstatus,jdbcType=INTEGER},
+      minicoupon = #{minicoupon,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=INTEGER}
+    where couponid = #{couponid,jdbcType=INTEGER}
+  </update>
+</mapper>

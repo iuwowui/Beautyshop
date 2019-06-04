@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aimei.beautyshop.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.aimei.beautyshop.entity.User">
+    <id column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="userphone" jdbcType="VARCHAR" property="userphone" />
+    <result column="userbirth" jdbcType="DATE" property="userbirth" />
+    <result column="useremail" jdbcType="VARCHAR" property="useremail" />
+    <result column="userimg" jdbcType="VARCHAR" property="userimg" />
+    <result column="cardid" jdbcType="INTEGER" property="cardid" />
+    <result column="addrid" jdbcType="INTEGER" property="addrid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    userid, username, userphone, userbirth, useremail, userimg, cardid, addrid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user
+    where userid = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.aimei.beautyshop.entity.User">
+    insert into t_user (userid, username, userphone, 
+      userbirth, useremail, userimg, 
+      cardid, addrid)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userphone,jdbcType=VARCHAR}, 
+      #{userbirth,jdbcType=DATE}, #{useremail,jdbcType=VARCHAR}, #{userimg,jdbcType=VARCHAR}, 
+      #{cardid,jdbcType=INTEGER}, #{addrid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aimei.beautyshop.entity.User">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="userphone != null">
+        userphone,
+      </if>
+      <if test="userbirth != null">
+        userbirth,
+      </if>
+      <if test="useremail != null">
+        useremail,
+      </if>
+      <if test="userimg != null">
+        userimg,
+      </if>
+      <if test="cardid != null">
+        cardid,
+      </if>
+      <if test="addrid != null">
+        addrid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null">
+        #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="userbirth != null">
+        #{userbirth,jdbcType=DATE},
+      </if>
+      <if test="useremail != null">
+        #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="userimg != null">
+        #{userimg,jdbcType=VARCHAR},
+      </if>
+      <if test="cardid != null">
+        #{cardid,jdbcType=INTEGER},
+      </if>
+      <if test="addrid != null">
+        #{addrid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aimei.beautyshop.entity.User">
+    update t_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null">
+        userphone = #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="userbirth != null">
+        userbirth = #{userbirth,jdbcType=DATE},
+      </if>
+      <if test="useremail != null">
+        useremail = #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="userimg != null">
+        userimg = #{userimg,jdbcType=VARCHAR},
+      </if>
+      <if test="cardid != null">
+        cardid = #{cardid,jdbcType=INTEGER},
+      </if>
+      <if test="addrid != null">
+        addrid = #{addrid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aimei.beautyshop.entity.User">
+    update t_user
+    set username = #{username,jdbcType=VARCHAR},
+      userphone = #{userphone,jdbcType=VARCHAR},
+      userbirth = #{userbirth,jdbcType=DATE},
+      useremail = #{useremail,jdbcType=VARCHAR},
+      userimg = #{userimg,jdbcType=VARCHAR},
+      cardid = #{cardid,jdbcType=INTEGER},
+      addrid = #{addrid,jdbcType=INTEGER}
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aimei.beautyshop.dao.OrderstaMapper">
+  <resultMap id="BaseResultMap" type="com.aimei.beautyshop.entity.Ordersta">
+    <id column="orderstaid" jdbcType="INTEGER" property="orderstaid" />
+    <result column="orderstatus" jdbcType="VARCHAR" property="orderstatus" />
+    <result column="orderid" jdbcType="INTEGER" property="orderid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    orderstaid, orderstatus, orderid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_ordersta
+    where orderstaid = #{orderstaid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_ordersta
+    where orderstaid = #{orderstaid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.aimei.beautyshop.entity.Ordersta">
+    insert into t_ordersta (orderstaid, orderstatus, orderid
+      )
+    values (#{orderstaid,jdbcType=INTEGER}, #{orderstatus,jdbcType=VARCHAR}, #{orderid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.aimei.beautyshop.entity.Ordersta">
+    insert into t_ordersta
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderstaid != null">
+        orderstaid,
+      </if>
+      <if test="orderstatus != null">
+        orderstatus,
+      </if>
+      <if test="orderid != null">
+        orderid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderstaid != null">
+        #{orderstaid,jdbcType=INTEGER},
+      </if>
+      <if test="orderstatus != null">
+        #{orderstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null">
+        #{orderid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aimei.beautyshop.entity.Ordersta">
+    update t_ordersta
+    <set>
+      <if test="orderstatus != null">
+        orderstatus = #{orderstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null">
+        orderid = #{orderid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where orderstaid = #{orderstaid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aimei.beautyshop.entity.Ordersta">
+    update t_ordersta
+    set orderstatus = #{orderstatus,jdbcType=VARCHAR},
+      orderid = #{orderid,jdbcType=INTEGER}
+    where orderstaid = #{orderstaid,jdbcType=INTEGER}
+  </update>
+</mapper>

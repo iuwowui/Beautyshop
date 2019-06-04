@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aimei.beautyshop.dao.GoodsimgMapper">
+  <resultMap id="BaseResultMap" type="com.aimei.beautyshop.entity.Goodsimg">
+    <id column="imgid" jdbcType="INTEGER" property="imgid" />
+    <result column="imgpath" jdbcType="VARCHAR" property="imgpath" />
+    <result column="goodsid" jdbcType="INTEGER" property="goodsid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    imgid, imgpath, goodsid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_goodsimg
+    where imgid = #{imgid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_goodsimg
+    where imgid = #{imgid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.aimei.beautyshop.entity.Goodsimg">
+    insert into t_goodsimg (imgid, imgpath, goodsid
+      )
+    values (#{imgid,jdbcType=INTEGER}, #{imgpath,jdbcType=VARCHAR}, #{goodsid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.aimei.beautyshop.entity.Goodsimg">
+    insert into t_goodsimg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="imgid != null">
+        imgid,
+      </if>
+      <if test="imgpath != null">
+        imgpath,
+      </if>
+      <if test="goodsid != null">
+        goodsid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="imgid != null">
+        #{imgid,jdbcType=INTEGER},
+      </if>
+      <if test="imgpath != null">
+        #{imgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aimei.beautyshop.entity.Goodsimg">
+    update t_goodsimg
+    <set>
+      <if test="imgpath != null">
+        imgpath = #{imgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsid != null">
+        goodsid = #{goodsid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where imgid = #{imgid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aimei.beautyshop.entity.Goodsimg">
+    update t_goodsimg
+    set imgpath = #{imgpath,jdbcType=VARCHAR},
+      goodsid = #{goodsid,jdbcType=INTEGER}
+    where imgid = #{imgid,jdbcType=INTEGER}
+  </update>
+</mapper>

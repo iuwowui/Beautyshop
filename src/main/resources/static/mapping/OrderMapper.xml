@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aimei.beautyshop.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.aimei.beautyshop.entity.Order">
+    <id column="orderid" jdbcType="INTEGER" property="orderid" />
+    <result column="ordercode" jdbcType="INTEGER" property="ordercode" />
+    <result column="orderstaid" jdbcType="INTEGER" property="orderstaid" />
+    <result column="totalprice" jdbcType="DOUBLE" property="totalprice" />
+    <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    orderid, ordercode, orderstaid, totalprice, creattime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.aimei.beautyshop.entity.Order">
+    insert into t_order (orderid, ordercode, orderstaid, 
+      totalprice, creattime)
+    values (#{orderid,jdbcType=INTEGER}, #{ordercode,jdbcType=INTEGER}, #{orderstaid,jdbcType=INTEGER}, 
+      #{totalprice,jdbcType=DOUBLE}, #{creattime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aimei.beautyshop.entity.Order">
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        orderid,
+      </if>
+      <if test="ordercode != null">
+        ordercode,
+      </if>
+      <if test="orderstaid != null">
+        orderstaid,
+      </if>
+      <if test="totalprice != null">
+        totalprice,
+      </if>
+      <if test="creattime != null">
+        creattime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="ordercode != null">
+        #{ordercode,jdbcType=INTEGER},
+      </if>
+      <if test="orderstaid != null">
+        #{orderstaid,jdbcType=INTEGER},
+      </if>
+      <if test="totalprice != null">
+        #{totalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="creattime != null">
+        #{creattime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aimei.beautyshop.entity.Order">
+    update t_order
+    <set>
+      <if test="ordercode != null">
+        ordercode = #{ordercode,jdbcType=INTEGER},
+      </if>
+      <if test="orderstaid != null">
+        orderstaid = #{orderstaid,jdbcType=INTEGER},
+      </if>
+      <if test="totalprice != null">
+        totalprice = #{totalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="creattime != null">
+        creattime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aimei.beautyshop.entity.Order">
+    update t_order
+    set ordercode = #{ordercode,jdbcType=INTEGER},
+      orderstaid = #{orderstaid,jdbcType=INTEGER},
+      totalprice = #{totalprice,jdbcType=DOUBLE},
+      creattime = #{creattime,jdbcType=TIMESTAMP}
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </update>
+</mapper>

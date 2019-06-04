@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aimei.beautyshop.dao.GoodstypeMapper">
+  <resultMap id="BaseResultMap" type="com.aimei.beautyshop.entity.Goodstype">
+    <id column="typeid" jdbcType="INTEGER" property="typeid" />
+    <result column="typename" jdbcType="VARCHAR" property="typename" />
+    <result column="typeimg" jdbcType="VARCHAR" property="typeimg" />
+    <result column="typestatus" jdbcType="INTEGER" property="typestatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    typeid, typename, typeimg, typestatus
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_goodstype
+    where typeid = #{typeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_goodstype
+    where typeid = #{typeid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.aimei.beautyshop.entity.Goodstype">
+    insert into t_goodstype (typeid, typename, typeimg, 
+      typestatus)
+    values (#{typeid,jdbcType=INTEGER}, #{typename,jdbcType=VARCHAR}, #{typeimg,jdbcType=VARCHAR}, 
+      #{typestatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aimei.beautyshop.entity.Goodstype">
+    insert into t_goodstype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="typeid != null">
+        typeid,
+      </if>
+      <if test="typename != null">
+        typename,
+      </if>
+      <if test="typeimg != null">
+        typeimg,
+      </if>
+      <if test="typestatus != null">
+        typestatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="typeid != null">
+        #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="typename != null">
+        #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="typeimg != null">
+        #{typeimg,jdbcType=VARCHAR},
+      </if>
+      <if test="typestatus != null">
+        #{typestatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aimei.beautyshop.entity.Goodstype">
+    update t_goodstype
+    <set>
+      <if test="typename != null">
+        typename = #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="typeimg != null">
+        typeimg = #{typeimg,jdbcType=VARCHAR},
+      </if>
+      <if test="typestatus != null">
+        typestatus = #{typestatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where typeid = #{typeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aimei.beautyshop.entity.Goodstype">
+    update t_goodstype
+    set typename = #{typename,jdbcType=VARCHAR},
+      typeimg = #{typeimg,jdbcType=VARCHAR},
+      typestatus = #{typestatus,jdbcType=INTEGER}
+    where typeid = #{typeid,jdbcType=INTEGER}
+  </update>
+</mapper>

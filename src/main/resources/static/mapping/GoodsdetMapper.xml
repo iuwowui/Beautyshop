@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aimei.beautyshop.dao.GoodsdetMapper">
+  <resultMap id="BaseResultMap" type="com.aimei.beautyshop.entity.Goodsdet">
+    <id column="goodsdetid" jdbcType="INTEGER" property="goodsdetid" />
+    <result column="goodsid" jdbcType="INTEGER" property="goodsid" />
+    <result column="goodstype" jdbcType="VARCHAR" property="goodstype" />
+    <result column="goodsprice" jdbcType="DOUBLE" property="goodsprice" />
+    <result column="goodsnum" jdbcType="DOUBLE" property="goodsnum" />
+    <result column="goodsstatus" jdbcType="INTEGER" property="goodsstatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    goodsdetid, goodsid, goodstype, goodsprice, goodsnum, goodsstatus
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_goodsdet
+    where goodsdetid = #{goodsdetid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_goodsdet
+    where goodsdetid = #{goodsdetid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.aimei.beautyshop.entity.Goodsdet">
+    insert into t_goodsdet (goodsdetid, goodsid, goodstype, 
+      goodsprice, goodsnum, goodsstatus
+      )
+    values (#{goodsdetid,jdbcType=INTEGER}, #{goodsid,jdbcType=INTEGER}, #{goodstype,jdbcType=VARCHAR}, 
+      #{goodsprice,jdbcType=DOUBLE}, #{goodsnum,jdbcType=DOUBLE}, #{goodsstatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.aimei.beautyshop.entity.Goodsdet">
+    insert into t_goodsdet
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodsdetid != null">
+        goodsdetid,
+      </if>
+      <if test="goodsid != null">
+        goodsid,
+      </if>
+      <if test="goodstype != null">
+        goodstype,
+      </if>
+      <if test="goodsprice != null">
+        goodsprice,
+      </if>
+      <if test="goodsnum != null">
+        goodsnum,
+      </if>
+      <if test="goodsstatus != null">
+        goodsstatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsdetid != null">
+        #{goodsdetid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="goodstype != null">
+        #{goodstype,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsprice != null">
+        #{goodsprice,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsnum != null">
+        #{goodsnum,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsstatus != null">
+        #{goodsstatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aimei.beautyshop.entity.Goodsdet">
+    update t_goodsdet
+    <set>
+      <if test="goodsid != null">
+        goodsid = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="goodstype != null">
+        goodstype = #{goodstype,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsprice != null">
+        goodsprice = #{goodsprice,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsnum != null">
+        goodsnum = #{goodsnum,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsstatus != null">
+        goodsstatus = #{goodsstatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where goodsdetid = #{goodsdetid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aimei.beautyshop.entity.Goodsdet">
+    update t_goodsdet
+    set goodsid = #{goodsid,jdbcType=INTEGER},
+      goodstype = #{goodstype,jdbcType=VARCHAR},
+      goodsprice = #{goodsprice,jdbcType=DOUBLE},
+      goodsnum = #{goodsnum,jdbcType=DOUBLE},
+      goodsstatus = #{goodsstatus,jdbcType=INTEGER}
+    where goodsdetid = #{goodsdetid,jdbcType=INTEGER}
+  </update>
+</mapper>
