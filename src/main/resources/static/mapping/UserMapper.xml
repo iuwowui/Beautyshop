@@ -125,4 +125,8 @@
       addrid = #{addrid,jdbcType=INTEGER}
     where userid = #{userid,jdbcType=INTEGER}
   </update>
+
+  <select id="selectById" parameterType="int" resultType="com.aimei.beautyshop.entity.User">
+      select * from t_user where userid=#{id}
+  </select>
 </mapper>
