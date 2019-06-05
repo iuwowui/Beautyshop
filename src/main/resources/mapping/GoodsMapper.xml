@@ -1,71 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aimei.beautyshop.dao.GoodsMapper">
-  <resultMap id="BaseResultMap" type="com.aimei.beautyshop.entity.Goods">
-    <id column="goodsid" jdbcType="INTEGER" property="goodsid" />
-    <result column="goodsname" jdbcType="VARCHAR" property="goodsname" />
-    <result column="typeid" jdbcType="INTEGER" property="typeid" />
+
+  <resultMap id="vGoods" type="com.aimei.beautyshop.vo.VGoods">
+    <id column="goodsid" property="goodsid"/>
+    <result column="goodsname" property="goodsname"></result>
+    <result column="goodssales" property="goodssales"></result>
+    <result column="goodsevaluate" property="goodsevaluate"></result>
+    <collection property="goodsimgs" javaType="list" ofType="com.aimei.beautyshop.entity.Goodsimg"
+      resultMap="com.aimei.beautyshop.dao.GoodsimgMapper.BaseResultMap"
+    ></collection>
   </resultMap>
-  <sql id="Base_Column_List">
-    goodsid, goodsname, typeid
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_goods
-    where goodsid = #{goodsid,jdbcType=INTEGER}
+
+  <select id="findGoodsByType" parameterType="int" resultMap="vGoods">
+    select g.goodsid,g.goodsname,g.goodssales,g.goodsvaluate,i.imgpath from t_goods g
+    inner join t_goodsimg i
+    on i.goodsid = g.goodsid
+    where typeid = #{typeid}
+    order by g.goodssales desc
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_goods
-    where goodsid = #{goodsid,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.aimei.beautyshop.entity.Goods">
-    insert into t_goods (goodsid, goodsname, typeid
-      )
-    values (#{goodsid,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{typeid,jdbcType=INTEGER}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.aimei.beautyshop.entity.Goods">
-    insert into t_goods
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="goodsid != null">
-        goodsid,
-      </if>
-      <if test="goodsname != null">
-        goodsname,
-      </if>
-      <if test="typeid != null">
-        typeid,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="goodsid != null">
-        #{goodsid,jdbcType=INTEGER},
-      </if>
-      <if test="goodsname != null">
-        #{goodsname,jdbcType=VARCHAR},
-      </if>
-      <if test="typeid != null">
-        #{typeid,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.aimei.beautyshop.entity.Goods">
-    update t_goods
-    <set>
-      <if test="goodsname != null">
-        goodsname = #{goodsname,jdbcType=VARCHAR},
-      </if>
-      <if test="typeid != null">
-        typeid = #{typeid,jdbcType=INTEGER},
-      </if>
-    </set>
-    where goodsid = #{goodsid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.aimei.beautyshop.entity.Goods">
-    update t_goods
-    set goodsname = #{goodsname,jdbcType=VARCHAR},
-      typeid = #{typeid,jdbcType=INTEGER}
-    where goodsid = #{goodsid,jdbcType=INTEGER}
-  </update>
 </mapper>

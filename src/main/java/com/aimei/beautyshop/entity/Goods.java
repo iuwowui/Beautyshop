@@ -7,6 +7,26 @@ public class Goods {
 
     private Integer typeid;
 
+    private Double goodssales;
+
+    private String goodsevaluate;
+
+    public Double getGoodssales() {
+        return goodssales;
+    }
+
+    public void setGoodssales(Double goodssales) {
+        this.goodssales = goodssales;
+    }
+
+    public String getGoodsevaluate() {
+        return goodsevaluate;
+    }
+
+    public void setGoodsevaluate(String goodsevaluate) {
+        this.goodsevaluate = goodsevaluate;
+    }
+
     public Integer getGoodsid() {
         return goodsid;
     }
