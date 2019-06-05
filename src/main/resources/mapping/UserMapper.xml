@@ -127,6 +127,6 @@
   </update>
 
   <select id="selectById" parameterType="int" resultType="com.aimei.beautyshop.entity.User">
-      select * from t_user where userid=#{id}
+      select username,userimg from t_user where userid=#{userid}
   </select>
 </mapper>

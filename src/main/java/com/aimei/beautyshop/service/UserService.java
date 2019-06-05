@@ -1,7 +1,7 @@
 package com.aimei.beautyshop.service;
 
-import com.aimei.beautyshop.entity.User;
+import com.aimei.beautyshop.vo.JsonBean;
 
 public interface UserService {
-    User login(int id);
+    JsonBean login(int userid);
 }
