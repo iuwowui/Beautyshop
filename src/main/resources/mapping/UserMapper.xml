@@ -14,6 +14,7 @@
   <sql id="Base_Column_List">
     userid, username, userphone, userbirth, useremail, userimg, cardid, addrid
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
