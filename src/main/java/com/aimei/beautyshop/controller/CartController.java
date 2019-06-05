@@ -6,10 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @ResponseBody
 @Controller
@@ -20,11 +17,27 @@ public class CartController {
     private CartService cartService;
 
     @CrossOrigin
-    @ApiOperation(value = "查看个人所有的购物车信息",notes = "查看个人所有的购物车信息")
+    @ApiOperation(value = "查看个人购物车",notes = "查看个人所有的购物车信息")
     @RequestMapping(value = "/cart/findMyCart.do",method = RequestMethod.GET)
     public JsonBean findMyCart(int userid){
 
         JsonBean bean = cartService.findAllCartByUid(userid);
+        return bean;
+    }
+
+    @CrossOrigin
+    @ApiOperation(value = "添加至购物车",notes = "添加商品至购物车内")
+    @RequestMapping(value = "/cart/addCart.do",method = RequestMethod.POST)
+    public JsonBean addCart(int userid,int goodsDetId){
+        JsonBean bean = cartService.addCart(userid, goodsDetId);
+        return bean;
+    }
+
+    @CrossOrigin
+    @ApiOperation(value = "删除购物车",notes = "批量删除购物车")
+    @RequestMapping(value = "/cart/deleteCarts.do",method = RequestMethod.DELETE)
+    public JsonBean deleteCart(@RequestParam("ids") int[] ids ){
+        JsonBean bean = cartService.deleteByCartId(ids);
         return bean;
     }
 }

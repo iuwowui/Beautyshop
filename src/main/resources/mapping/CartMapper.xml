@@ -96,4 +96,18 @@
     on c.goodsdetid = g.goodsdetid
     where c.userid = #{userid}
   </select>
+
+  <select id="selectCartByCon" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from t_cart where userid = #{userid} and goodsdetid = #{goodsdetid}
+  </select>
+
+  <delete id="deleteCartByIds" parameterType="int">
+
+    delete from t_cart where cartid =
+    <foreach collection="array" item="id" separator="," open="(" close=")">
+          #{id}
+    </foreach>
+  </delete>
 </mapper>
