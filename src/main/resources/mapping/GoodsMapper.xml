@@ -19,4 +19,15 @@
     where typeid = #{typeid}
     order by g.goodssales desc
   </select>
+
+  <select id="findGoodsByCon" parameterType="map" resultMap="vGoods">
+    select g.goodsid,g.goodsname,g.goodssales,g.goodsvaluate,i.imgpath from t_goods g
+    inner join t_goodsimg i
+    on i.goodsid = g.goodsid
+    where typeid = #{typeid}
+    <if test="goodsName != null">
+      and goodsname like concat('%',#{goodsName},'%')
+    </if>
+    order by g.goodssales desc
+  </select>
 </mapper>

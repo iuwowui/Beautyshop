@@ -24,6 +24,17 @@ public class GoodsServiceImpl  implements GoodsService {
         }else {
             return JsonBean.setOK("ok",goods);
         }
+    }
 
+    @Override
+    public JsonBean findGoodsByCon(int typeId, String goodsName) {
+
+        List<VGoods> list = goodsDao.findGoodsByCon(typeId, goodsName);
+
+        if (list == null || list.isEmpty()){
+            return JsonBean.setERROR();
+        }else {
+            return JsonBean.setOK("ok",list);
+        }
     }
 }

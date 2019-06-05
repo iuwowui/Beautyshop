@@ -13,6 +13,10 @@ public class Goodsdet {
 
     private Integer goodsstatus;
 
+    private String imgpath;
+
+    private String goodsdesc;
+
     public Integer getGoodsdetid() {
         return goodsdetid;
     }
@@ -59,5 +63,21 @@ public class Goodsdet {
 
     public void setGoodsstatus(Integer goodsstatus) {
         this.goodsstatus = goodsstatus;
+    }
+
+    public String getImgpath() {
+        return imgpath;
+    }
+
+    public void setImgpath(String imgpath) {
+        this.imgpath = imgpath == null ? null : imgpath.trim();
+    }
+
+    public String getGoodsdesc() {
+        return goodsdesc;
+    }
+
+    public void setGoodsdesc(String goodsdesc) {
+        this.goodsdesc = goodsdesc == null ? null : goodsdesc.trim();
     }
 }

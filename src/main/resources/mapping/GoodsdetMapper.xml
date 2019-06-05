@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aimei.beautyshop.dao.GoodsdetMapper">
-  <resultMap id="BaseResultMap" type="com.aimei.beautyshop.entity.Goodsdet">
+  <resultMap id="BaseResultMap" type="com.qfedu.entity.Goodsdet">
     <id column="goodsdetid" jdbcType="INTEGER" property="goodsdetid" />
     <result column="goodsid" jdbcType="INTEGER" property="goodsid" />
     <result column="goodstype" jdbcType="VARCHAR" property="goodstype" />
     <result column="goodsprice" jdbcType="DOUBLE" property="goodsprice" />
     <result column="goodsnum" jdbcType="DOUBLE" property="goodsnum" />
     <result column="goodsstatus" jdbcType="INTEGER" property="goodsstatus" />
+    <result column="imgpath" jdbcType="VARCHAR" property="imgpath" />
+    <result column="goodsdesc" jdbcType="VARCHAR" property="goodsdesc" />
   </resultMap>
   <sql id="Base_Column_List">
-    goodsdetid, goodsid, goodstype, goodsprice, goodsnum, goodsstatus
+    goodsdetid, goodsid, goodstype, goodsprice, goodsnum, goodsstatus, imgpath, goodsdesc
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -22,15 +24,15 @@
     delete from t_goodsdet
     where goodsdetid = #{goodsdetid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.aimei.beautyshop.entity.Goodsdet">
+  <insert id="insert" parameterType="com.qfedu.entity.Goodsdet">
     insert into t_goodsdet (goodsdetid, goodsid, goodstype, 
-      goodsprice, goodsnum, goodsstatus
-      )
+      goodsprice, goodsnum, goodsstatus, 
+      imgpath, goodsdesc)
     values (#{goodsdetid,jdbcType=INTEGER}, #{goodsid,jdbcType=INTEGER}, #{goodstype,jdbcType=VARCHAR}, 
-      #{goodsprice,jdbcType=DOUBLE}, #{goodsnum,jdbcType=DOUBLE}, #{goodsstatus,jdbcType=INTEGER}
-      )
+      #{goodsprice,jdbcType=DOUBLE}, #{goodsnum,jdbcType=DOUBLE}, #{goodsstatus,jdbcType=INTEGER}, 
+      #{imgpath,jdbcType=VARCHAR}, #{goodsdesc,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.aimei.beautyshop.entity.Goodsdet">
+  <insert id="insertSelective" parameterType="com.qfedu.entity.Goodsdet">
     insert into t_goodsdet
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="goodsdetid != null">
@@ -50,6 +52,12 @@
       </if>
       <if test="goodsstatus != null">
         goodsstatus,
+      </if>
+      <if test="imgpath != null">
+        imgpath,
+      </if>
+      <if test="goodsdesc != null">
+        goodsdesc,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -71,9 +79,15 @@
       <if test="goodsstatus != null">
         #{goodsstatus,jdbcType=INTEGER},
       </if>
+      <if test="imgpath != null">
+        #{imgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsdesc != null">
+        #{goodsdesc,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.aimei.beautyshop.entity.Goodsdet">
+  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.entity.Goodsdet">
     update t_goodsdet
     <set>
       <if test="goodsid != null">
@@ -91,16 +105,30 @@
       <if test="goodsstatus != null">
         goodsstatus = #{goodsstatus,jdbcType=INTEGER},
       </if>
+      <if test="imgpath != null">
+        imgpath = #{imgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsdesc != null">
+        goodsdesc = #{goodsdesc,jdbcType=VARCHAR},
+      </if>
     </set>
     where goodsdetid = #{goodsdetid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.aimei.beautyshop.entity.Goodsdet">
+  <update id="updateByPrimaryKey" parameterType="com.qfedu.entity.Goodsdet">
     update t_goodsdet
     set goodsid = #{goodsid,jdbcType=INTEGER},
       goodstype = #{goodstype,jdbcType=VARCHAR},
       goodsprice = #{goodsprice,jdbcType=DOUBLE},
       goodsnum = #{goodsnum,jdbcType=DOUBLE},
-      goodsstatus = #{goodsstatus,jdbcType=INTEGER}
+      goodsstatus = #{goodsstatus,jdbcType=INTEGER},
+      imgpath = #{imgpath,jdbcType=VARCHAR},
+      goodsdesc = #{goodsdesc,jdbcType=VARCHAR}
     where goodsdetid = #{goodsdetid,jdbcType=INTEGER}
   </update>
+
+  <select id="findGoodsDetByGoodsId" parameterType="int" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from t_goodsdet where goodsid = #{goodsId}
+  </select>
 </mapper>
