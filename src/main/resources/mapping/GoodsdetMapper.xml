@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aimei.beautyshop.dao.GoodsdetMapper">
-  <resultMap id="BaseResultMap" type="com.qfedu.entity.Goodsdet">
+  <resultMap id="BaseResultMap" type="com.aimei.beautyshop.entity.Goodsdet">
     <id column="goodsdetid" jdbcType="INTEGER" property="goodsdetid" />
     <result column="goodsid" jdbcType="INTEGER" property="goodsid" />
     <result column="goodstype" jdbcType="VARCHAR" property="goodstype" />
@@ -24,7 +24,7 @@
     delete from t_goodsdet
     where goodsdetid = #{goodsdetid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.qfedu.entity.Goodsdet">
+  <insert id="insert" parameterType="com.aimei.beautyshop.entity.Goodsdet">
     insert into t_goodsdet (goodsdetid, goodsid, goodstype, 
       goodsprice, goodsnum, goodsstatus, 
       imgpath, goodsdesc)
@@ -32,7 +32,7 @@
       #{goodsprice,jdbcType=DOUBLE}, #{goodsnum,jdbcType=DOUBLE}, #{goodsstatus,jdbcType=INTEGER}, 
       #{imgpath,jdbcType=VARCHAR}, #{goodsdesc,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.qfedu.entity.Goodsdet">
+  <insert id="insertSelective" parameterType="com.aimei.beautyshop.entity.Goodsdet">
     insert into t_goodsdet
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="goodsdetid != null">
@@ -87,7 +87,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.entity.Goodsdet">
+  <update id="updateByPrimaryKeySelective" parameterType="com.aimei.beautyshop.entity.Goodsdet">
     update t_goodsdet
     <set>
       <if test="goodsid != null">
@@ -114,7 +114,7 @@
     </set>
     where goodsdetid = #{goodsdetid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.qfedu.entity.Goodsdet">
+  <update id="updateByPrimaryKey" parameterType="com.aimei.beautyshop.entity.Goodsdet">
     update t_goodsdet
     set goodsid = #{goodsid,jdbcType=INTEGER},
       goodstype = #{goodstype,jdbcType=VARCHAR},
