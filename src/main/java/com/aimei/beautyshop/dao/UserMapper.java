@@ -18,4 +18,5 @@ public interface UserMapper {
     User selectById(int userid);
 
     int updataById(User user);
+
 }

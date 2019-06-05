@@ -21,4 +21,13 @@ public class UserServiceImpl implements UserService {
             return JsonBean.setERROR();
         }
     }
+
+    @Override
+    public JsonBean updateUserInfo(User user) {
+        if (userMapper.updataById(user) > 0) {
+            return JsonBean.setOK();
+        } else {
+            return JsonBean.setERROR();
+        }
+    }
 }

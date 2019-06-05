@@ -10,9 +10,10 @@
     <result column="userimg" jdbcType="VARCHAR" property="userimg" />
     <result column="cardid" jdbcType="INTEGER" property="cardid" />
     <result column="addrid" jdbcType="INTEGER" property="addrid" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
   </resultMap>
   <sql id="Base_Column_List">
-    userid, username, userphone, userbirth, useremail, userimg, cardid, addrid
+    userid, username, userphone, userbirth, useremail, userimg, cardid, addrid, realname
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -28,10 +29,10 @@
   <insert id="insert" parameterType="com.aimei.beautyshop.entity.User">
     insert into t_user (userid, username, userphone, 
       userbirth, useremail, userimg, 
-      cardid, addrid)
+      cardid, addrid, realname)
     values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userphone,jdbcType=VARCHAR}, 
       #{userbirth,jdbcType=DATE}, #{useremail,jdbcType=VARCHAR}, #{userimg,jdbcType=VARCHAR}, 
-      #{cardid,jdbcType=INTEGER}, #{addrid,jdbcType=INTEGER})
+      #{cardid,jdbcType=INTEGER}, #{addrid,jdbcType=INTEGER}), #{realname,jdbcType=VARCHAR}
   </insert>
   <insert id="insertSelective" parameterType="com.aimei.beautyshop.entity.User">
     insert into t_user
@@ -60,6 +61,9 @@
       <if test="addrid != null">
         addrid,
       </if>
+      <if test="realname != null">
+        realname,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userid != null">
@@ -85,6 +89,9 @@
       </if>
       <if test="addrid != null">
         #{addrid,jdbcType=INTEGER},
+      </if>
+      <if test="realname != null">
+        #{realname,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -112,6 +119,9 @@
       <if test="addrid != null">
         addrid = #{addrid,jdbcType=INTEGER},
       </if>
+      <if test="realname != null">
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
     </set>
     where userid = #{userid,jdbcType=INTEGER}
   </update>
@@ -123,11 +133,23 @@
       useremail = #{useremail,jdbcType=VARCHAR},
       userimg = #{userimg,jdbcType=VARCHAR},
       cardid = #{cardid,jdbcType=INTEGER},
-      addrid = #{addrid,jdbcType=INTEGER}
+      addrid = #{addrid,jdbcType=INTEGER},
+      realname = #{realname,jdbcType=VARCHAR}
     where userid = #{userid,jdbcType=INTEGER}
   </update>
 
   <select id="selectById" parameterType="int" resultType="com.aimei.beautyshop.entity.User">
-      select username,userimg from t_user where userid=#{userid}
+      select
+    <include refid="Base_Column_List" />
+       from t_user where userid=#{userid}
   </select>
+
+  <update id="updataById" parameterType="com.aimei.beautyshop.entity.User">
+      update t_user
+      set realname=#{realname},
+      userphone=#{userphone},
+      userbirth=#{userbirth},
+      useremail=#{useremail}
+      where userid=#{userid}
+  </update>
 </mapper>
