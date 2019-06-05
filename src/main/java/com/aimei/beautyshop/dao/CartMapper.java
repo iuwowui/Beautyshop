@@ -1,6 +1,9 @@
 package com.aimei.beautyshop.dao;
 
 import com.aimei.beautyshop.entity.Cart;
+import com.aimei.beautyshop.vo.VCart;
+
+import java.util.List;
 
 public interface CartMapper {
     int deleteByPrimaryKey(Integer cartid);
@@ -14,4 +17,6 @@ public interface CartMapper {
     int updateByPrimaryKeySelective(Cart record);
 
     int updateByPrimaryKey(Cart record);
+
+    List<VCart> findAllCartByUid(int uid);
 }

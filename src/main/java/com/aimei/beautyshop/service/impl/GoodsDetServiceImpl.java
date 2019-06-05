@@ -27,4 +27,12 @@ public class GoodsDetServiceImpl implements GoodsDetService {
         }
 
     }
+
+    @Override
+    public JsonBean findGoodDetByDid(int goodsDetId) {
+
+        Goodsdet goodsdet = goodsdetMapper.selectByPrimaryKey(goodsDetId);
+
+        return JsonBean.setOK("ok",goodsdet);
+    }
 }

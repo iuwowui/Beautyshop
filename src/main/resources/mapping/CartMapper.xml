@@ -7,6 +7,16 @@
     <result column="goodsdetid" jdbcType="INTEGER" property="goodsdetid" />
     <result column="goodsnum" jdbcType="DOUBLE" property="goodsnum" />
   </resultMap>
+
+  <resultMap id="Vcart" type="com.aimei.beautyshop.vo.VCart">
+    <id column="cartid" jdbcType="INTEGER" property="cartid" />
+    <result column="goodsdetid" jdbcType="INTEGER" property="goodsdetid" />
+    <result column="goodstype" jdbcType="VARCHAR" property="goodstype" />
+    <result column="goodsprice" jdbcType="DOUBLE" property="goodsprice" />
+    <result column="imgpath" jdbcType="VARCHAR" property="imgpath" />
+    <result column="goodsnum" jdbcType="DOUBLE" property="goodsnum" />
+    <result column="goodsdesc" jdbcType="VARCHAR" property="goodsdesc" />
+  </resultMap>
   <sql id="Base_Column_List">
     cartid, userid, goodsdetid, goodsnum
   </sql>
@@ -79,4 +89,11 @@
       goodsnum = #{goodsnum,jdbcType=DOUBLE}
     where cartid = #{cartid,jdbcType=INTEGER}
   </update>
+
+  <select id="findAllCartByUid" parameterType="int" resultMap="Vcart">
+    select c.cartid,c.goodsdetid,g.goodstype,g.goodsprice,g.imgpath,g.goodsdesc from t_cart c
+    inner join t_goodsdet g
+    on c.goodsdetid = g.goodsdetid
+    where c.userid = #{userid}
+  </select>
 </mapper>

@@ -28,4 +28,12 @@ public class GoodsDetController {
         return bean;
     }
 
+    @CrossOrigin
+    @ApiOperation(value = "通过商品详情id查看该商品的详情", notes = "查看商品详情")
+    @RequestMapping(value = "/goodsDet/findGoodsDetById.do",method = RequestMethod.GET)
+    public JsonBean findGoodsDetById(int goodsDetId){
+        JsonBean bean = goodsDetService.findGoodDetByDid(goodsDetId);
+        return bean;
+    }
+
 }
