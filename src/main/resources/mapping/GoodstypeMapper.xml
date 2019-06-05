@@ -80,7 +80,7 @@
     where typeid = #{typeid,jdbcType=INTEGER}
   </update>
 
-  <select id="findAllTypes" resultType="BaseResultMap">
+  <select id="findAllTypes" resultMap="BaseResultMap">
     select
      <include refid="Base_Column_List"></include>
      from t_goodstype where typestatus = 1;
