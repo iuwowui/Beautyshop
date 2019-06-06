@@ -92,7 +92,7 @@
 
   <select id="findAllCartByUid" parameterType="int" resultMap="Vcart">
     select c.cartid,c.goodsdetid,g.goodstype,g.goodsprice,g.imgpath,g.goodsdesc from t_cart c
-    inner join t_goodsdet g
+    left join t_goodsdet g
     on c.goodsdetid = g.goodsdetid
     where c.userid = #{userid}
   </select>
@@ -100,14 +100,23 @@
   <select id="selectCartByCon" parameterType="map" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"></include>
-    from t_cart where userid = #{userid} and goodsdetid = #{goodsdetid}
+    from t_cart where userid = #{userid} and goodsdetid = #{goodsdetId}
   </select>
 
-  <delete id="deleteCartByIds" parameterType="int">
+  <delete id="deleteCartByIds" parameterType="map">
 
-    delete from t_cart where cartid =
-    <foreach collection="array" item="id" separator="," open="(" close=")">
+    delete from t_cart where cartid in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">
           #{id}
     </foreach>
   </delete>
+
+  <select id="findCartsByCid" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from t_cart where cartid in
+    <foreach collection="cartIds" item="cartid" separator="," open="(" close=")">
+      #{cartid}
+    </foreach>
+  </select>
 </mapper>

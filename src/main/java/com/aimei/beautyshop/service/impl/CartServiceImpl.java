@@ -40,7 +40,7 @@ public class CartServiceImpl implements CartService {
             cart1.setGoodsdetid(goodsdetId);
             cart1.setUserid(userid);
             cart1.setGoodsnum((double) 1);
-            cartMapper.insertSelective(cart);
+            cartMapper.insertSelective(cart1);
         }else {
             Double goodsnum = cart.getGoodsnum();
             Cart cart1 = new Cart();
