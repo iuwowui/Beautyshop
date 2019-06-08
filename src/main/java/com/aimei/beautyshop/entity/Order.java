@@ -13,6 +13,8 @@ public class Order {
 
     private Date creattime;
 
+    private Integer userid;
+
     public Integer getOrderid() {
         return orderid;
     }
@@ -26,7 +28,7 @@ public class Order {
     }
 
     public void setOrdercode(String ordercode) {
-        this.ordercode = ordercode;
+        this.ordercode = ordercode == null ? null : ordercode.trim();
     }
 
     public Integer getOrderstaid() {
@@ -51,5 +53,13 @@ public class Order {
 
     public void setCreattime(Date creattime) {
         this.creattime = creattime;
+    }
+
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 }
