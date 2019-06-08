@@ -61,20 +61,21 @@ public class OrderServiceImpl implements OrderService {
                 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
                 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
         Random random = new Random();
-        for (int i = 0; i <6; i++){
+        for (int i = 0; i <3; i++){
             char num = ch[random.nextInt(ch.length)];
             str += num;
         }
-
         String ordercode = time + str;
         order.setOrdercode(ordercode);
         orderMapper.insert(order);
+        int selectlastinsert = orderMapper.selectlastinsert();
 
         for (int i = 0;i < cartid.length;i++){
             Orderdet orderdet = new Orderdet();
             orderdet.setGoodsdetid(gooddetid[i]);
             orderdet.setGoodsnum((double) nums[i]);
-            orderdet.setOrderid(1);
+            orderdet.setOrderid(selectlastinsert);
+            orderdetMapper.insert(orderdet);
         }
         return JsonBean.setOK();
     }

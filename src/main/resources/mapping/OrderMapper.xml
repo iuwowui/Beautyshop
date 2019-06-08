@@ -90,4 +90,8 @@
       creattime = #{creattime,jdbcType=TIMESTAMP}
     where orderid = #{orderid,jdbcType=INTEGER}
   </update>
+
+  <select id="selectlastinsert" resultType="int">
+    SELECT LAST_INSERT_ID()
+  </select>
 </mapper>
