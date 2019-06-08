@@ -9,4 +9,6 @@ public interface CartService {
     public JsonBean addCart(int userid,int goodsdetId);
 
     public JsonBean deleteByCartId(int[] ids);
+
+    public JsonBean updateCart(int cartid,double num);
 }

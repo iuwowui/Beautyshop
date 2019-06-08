@@ -1,7 +1,9 @@
 package com.aimei.beautyshop.service.impl;
 
 import com.aimei.beautyshop.dao.CartMapper;
+import com.aimei.beautyshop.dao.GoodsdetMapper;
 import com.aimei.beautyshop.entity.Cart;
+import com.aimei.beautyshop.entity.Goodsdet;
 import com.aimei.beautyshop.service.CartService;
 import com.aimei.beautyshop.vo.JsonBean;
 import com.aimei.beautyshop.vo.VCart;
@@ -18,6 +20,9 @@ public class CartServiceImpl implements CartService {
 
     @Autowired
     private CartMapper cartMapper;
+
+    @Autowired
+    private GoodsdetMapper goodsdetMapper;
 
     @Override
     public JsonBean findAllCartByUid(int userid) {
@@ -63,5 +68,31 @@ public class CartServiceImpl implements CartService {
             return JsonBean.setERROR();
         }
 
+    }
+
+    @Override
+    public JsonBean updateCart(int cartid, double num) {
+
+        Cart cart = cartMapper.selectByPrimaryKey(cartid);
+
+        if (cart == null){
+            return JsonBean.setERROR();
+        }
+
+        Integer goodsdetid = cart.getGoodsdetid();
+        Goodsdet goodsdet = goodsdetMapper.selectByPrimaryKey(goodsdetid);
+        if (goodsdet.getGoodsstatus() == 0){
+            return JsonBean.setERROR();
+        }
+
+        if (goodsdet.getGoodsnum() < num){
+            return JsonBean.setERROR();
+        }
+
+        cart.setGoodsnum(num);
+
+        cartMapper.updateByPrimaryKeySelective(cart);
+
+        return JsonBean.setOK();
     }
 }
