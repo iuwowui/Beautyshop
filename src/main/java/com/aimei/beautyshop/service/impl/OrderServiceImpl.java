@@ -23,18 +23,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMapper orderMapper;
-
-
     @Autowired
     private CartMapper cartMapper;
-
     @Autowired
     private GoodsdetMapper goodsdetMapper;
-
     @Autowired
-   private OrderdetMapper orderdetMapper;
-
-
+    private OrderdetMapper orderdetMapper;
+    @Autowired
+    private CartMapper cartMapper;
     @Override
     public JsonBean addOrder(int userid, int[] cartid, int[] gooddetid, int[] nums,Double totalprice) {
 
@@ -46,15 +42,21 @@ public class OrderServiceImpl implements OrderService {
         }
         for (int i = 0;i < cartid.length;i++){
             Goodsdet goodsdet = goodsdetMapper.selectByPrimaryKey(gooddetid[i]);
-            if (goodsdet.getGoodsnum() < nums[i]){
+            Double goodsnum = goodsdet.getGoodsnum();
+            int num = nums[i];
+            if (goodsnum < num){
                 return JsonBean.setOK("该商品数量有限",goodsdet.getGoodstype());
+            }else {
+                goodsdet.setGoodsnum(goodsnum - num);
+                goodsdetMapper.updateByPrimaryKeySelective(goodsdet);
             }
         }
         Order order = new Order();
         order.setCreattime(new Date());
         order.setOrderstaid(1);
         order.setTotalprice(totalprice);
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        order.setUserid(userid);
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
         String time = format.format(new Date());
         String str = "";
         char[] ch = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
@@ -67,7 +69,7 @@ public class OrderServiceImpl implements OrderService {
         }
         String ordercode = time + str;
         order.setOrdercode(ordercode);
-        orderMapper.insert(order);
+        orderMapper.insertSelective(order);
         int selectlastinsert = orderMapper.selectlastinsert();
 
         for (int i = 0;i < cartid.length;i++){
@@ -77,6 +79,7 @@ public class OrderServiceImpl implements OrderService {
             orderdet.setOrderid(selectlastinsert);
             orderdetMapper.insert(orderdet);
         }
+        cartMapper.deleteCartByIds(cartid);
         return JsonBean.setOK();
     }
 }
