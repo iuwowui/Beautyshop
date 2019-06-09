@@ -106,4 +106,9 @@
   <select id="selectlastinsert" resultType="int">
     SELECT LAST_INSERT_ID()
   </select>
+
+  <select id="findOrdersBySta" parameterType="map" resultMap="BaseResultMap">
+    select * from t_order where orderstaid = #{statusid}
+    and userid = #{userid}
+  </select>
 </mapper>

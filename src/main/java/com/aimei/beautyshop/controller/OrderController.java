@@ -25,4 +25,12 @@ public class OrderController {
         JsonBean bean = orderService.addOrder(userid, cartids, gooddetids, nums, totalprice);
         return bean;
     }
+
+    @CrossOrigin
+    @ApiOperation(value = "根据状态查看订单",notes = "根据状态查看订单")
+    @RequestMapping(value = "/order/findMyOrder",method = RequestMethod.GET)
+    public JsonBean findMyOrder(int userid,int statusid){
+        JsonBean bean = orderService.findOrderByStatus(userid, statusid);
+        return bean;
+    }
 }

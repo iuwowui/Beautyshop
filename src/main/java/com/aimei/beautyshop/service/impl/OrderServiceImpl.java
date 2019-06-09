@@ -15,12 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 @Transactional
 @Service
 public class OrderServiceImpl implements OrderService {
-
     @Autowired
     private OrderMapper orderMapper;
     @Autowired
@@ -81,5 +81,13 @@ public class OrderServiceImpl implements OrderService {
         }
         cartMapper.deleteCartByIds(cartid);
         return JsonBean.setOK();
+    }
+    @Override
+    public JsonBean findOrderByStatus(int userid, int statusid) {
+        List<Order> list = orderMapper.findOrdersBySta(userid, statusid);
+        if (list == null || list.isEmpty()){
+            return JsonBean.setOK("该分类为数据",null);
+        }
+        return JsonBean.setOK("ok",list);
     }
 }
