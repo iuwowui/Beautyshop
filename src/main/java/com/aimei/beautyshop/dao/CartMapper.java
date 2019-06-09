@@ -24,4 +24,6 @@ public interface CartMapper {
     Cart selectCartByCon(@Param("userid") int userid,@Param("goodsdetId") int goodDetId);
 
     int deleteCartByIds(@Param("ids") int[] ids);
+
+    List<Cart> findCartsByCid(@Param("cartIds") int[] cartIds);
 }

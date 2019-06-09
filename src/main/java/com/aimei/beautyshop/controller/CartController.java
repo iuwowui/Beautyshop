@@ -40,4 +40,12 @@ public class CartController {
         JsonBean bean = cartService.deleteByCartId(ids);
         return bean;
     }
+
+    @CrossOrigin
+    @ApiOperation(value = "更新购物数量",notes ="更新购物车中的商品数量" )
+    @RequestMapping(value = "/cart/updateCart",method = RequestMethod.PUT)
+    public JsonBean updateCart(int cartId,double num){
+        JsonBean bean = cartService.updateCart(cartId, num);
+        return bean;
+    }
 }

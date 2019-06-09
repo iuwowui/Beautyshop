@@ -5,13 +5,15 @@ import java.util.Date;
 public class Order {
     private Integer orderid;
 
-    private Integer ordercode;
+    private String ordercode;
 
     private Integer orderstaid;
 
     private Double totalprice;
 
     private Date creattime;
+
+    private Integer userid;
 
     public Integer getOrderid() {
         return orderid;
@@ -21,12 +23,12 @@ public class Order {
         this.orderid = orderid;
     }
 
-    public Integer getOrdercode() {
+    public String getOrdercode() {
         return ordercode;
     }
 
-    public void setOrdercode(Integer ordercode) {
-        this.ordercode = ordercode;
+    public void setOrdercode(String ordercode) {
+        this.ordercode = ordercode == null ? null : ordercode.trim();
     }
 
     public Integer getOrderstaid() {
@@ -51,5 +53,13 @@ public class Order {
 
     public void setCreattime(Date creattime) {
         this.creattime = creattime;
+    }
+
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 }

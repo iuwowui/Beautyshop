@@ -1,6 +1,9 @@
 package com.aimei.beautyshop.dao;
 
 import com.aimei.beautyshop.entity.Order;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface OrderMapper {
     int deleteByPrimaryKey(Integer orderid);
@@ -14,4 +17,8 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    int selectlastinsert();
+
+    List<Order> findOrdersBySta(@Param("userid") int userid,@Param("statusid") int statusid);
 }

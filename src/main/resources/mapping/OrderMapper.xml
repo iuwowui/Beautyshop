@@ -3,13 +3,14 @@
 <mapper namespace="com.aimei.beautyshop.dao.OrderMapper">
   <resultMap id="BaseResultMap" type="com.aimei.beautyshop.entity.Order">
     <id column="orderid" jdbcType="INTEGER" property="orderid" />
-    <result column="ordercode" jdbcType="INTEGER" property="ordercode" />
+    <result column="ordercode" jdbcType="VARCHAR" property="ordercode" />
     <result column="orderstaid" jdbcType="INTEGER" property="orderstaid" />
     <result column="totalprice" jdbcType="DOUBLE" property="totalprice" />
     <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
   </resultMap>
   <sql id="Base_Column_List">
-    orderid, ordercode, orderstaid, totalprice, creattime
+    orderid, ordercode, orderstaid, totalprice, creattime，userid
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -23,9 +24,9 @@
   </delete>
   <insert id="insert" parameterType="com.aimei.beautyshop.entity.Order">
     insert into t_order (orderid, ordercode, orderstaid, 
-      totalprice, creattime)
-    values (#{orderid,jdbcType=INTEGER}, #{ordercode,jdbcType=INTEGER}, #{orderstaid,jdbcType=INTEGER}, 
-      #{totalprice,jdbcType=DOUBLE}, #{creattime,jdbcType=TIMESTAMP})
+      totalprice, creattime，userid)
+     values (#{orderid,jdbcType=INTEGER}, #{ordercode,jdbcType=VARCHAR}, #{orderstaid,jdbcType=INTEGER},
+      #{totalprice,jdbcType=DOUBLE}, #{creattime,jdbcType=TIMESTAMP}, #{userid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.aimei.beautyshop.entity.Order">
     insert into t_order
@@ -45,13 +46,16 @@
       <if test="creattime != null">
         creattime,
       </if>
+      <if test="userid != null">
+        userid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderid != null">
         #{orderid,jdbcType=INTEGER},
       </if>
       <if test="ordercode != null">
-        #{ordercode,jdbcType=INTEGER},
+        #{ordercode,jdbcType=VARCHAR},
       </if>
       <if test="orderstaid != null">
         #{orderstaid,jdbcType=INTEGER},
@@ -62,13 +66,16 @@
       <if test="creattime != null">
         #{creattime,jdbcType=TIMESTAMP},
       </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.aimei.beautyshop.entity.Order">
     update t_order
     <set>
       <if test="ordercode != null">
-        ordercode = #{ordercode,jdbcType=INTEGER},
+        ordercode = #{ordercode,jdbcType=VARCHAR},
       </if>
       <if test="orderstaid != null">
         orderstaid = #{orderstaid,jdbcType=INTEGER},
@@ -79,15 +86,29 @@
       <if test="creattime != null">
         creattime = #{creattime,jdbcType=TIMESTAMP},
       </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
     </set>
     where orderid = #{orderid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.aimei.beautyshop.entity.Order">
-    update t_order
-    set ordercode = #{ordercode,jdbcType=INTEGER},
+   update t_order
+    set ordercode = #{ordercode,jdbcType=VARCHAR},
       orderstaid = #{orderstaid,jdbcType=INTEGER},
       totalprice = #{totalprice,jdbcType=DOUBLE},
-      creattime = #{creattime,jdbcType=TIMESTAMP}
+      creattime = #{creattime,jdbcType=TIMESTAMP},
+      userid = #{userid,jdbcType=INTEGER}
     where orderid = #{orderid,jdbcType=INTEGER}
+
   </update>
+
+  <select id="selectlastinsert" resultType="int">
+    SELECT LAST_INSERT_ID()
+  </select>
+
+  <select id="findOrdersBySta" parameterType="map" resultMap="BaseResultMap">
+    select * from t_order where orderstaid = #{statusid}
+    and userid = #{userid}
+  </select>
 </mapper>
