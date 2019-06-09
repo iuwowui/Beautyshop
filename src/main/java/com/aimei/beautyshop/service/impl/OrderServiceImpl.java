@@ -29,8 +29,7 @@ public class OrderServiceImpl implements OrderService {
     private GoodsdetMapper goodsdetMapper;
     @Autowired
     private OrderdetMapper orderdetMapper;
-    @Autowired
-    private CartMapper cartMapper;
+
     @Override
     public JsonBean addOrder(int userid, int[] cartid, int[] gooddetid, int[] nums,Double totalprice) {
 
