@@ -3,7 +3,7 @@
 <mapper namespace="com.aimei.beautyshop.dao.CardMapper">
   <resultMap id="BaseResultMap" type="com.aimei.beautyshop.entity.Card">
     <id column="cardid" jdbcType="INTEGER" property="cardid" />
-    <result column="drawtime" jdbcType="TIMESTAMP" property="drawtime" />
+    <result column="drawtime"  property="drawtime" />
     <result column="integral" jdbcType="INTEGER" property="integral" />
     <result column="cardcode" jdbcType="VARCHAR" property="cardcode" />
   </resultMap>
@@ -79,4 +79,10 @@
       cardcode = #{cardcode,jdbcType=VARCHAR}
     where cardid = #{cardid,jdbcType=INTEGER}
   </update>
+
+  <insert id="addCard" parameterType="com.aimei.beautyshop.entity.Card">
+    insert into t_card (cardid, drawtime, integral, cardcode)
+    values (#{cardid}, #{drawtime}, #{integral},
+      #{cardcode})
+  </insert>
 </mapper>

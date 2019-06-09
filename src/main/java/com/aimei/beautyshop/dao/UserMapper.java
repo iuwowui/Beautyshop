@@ -19,4 +19,6 @@ public interface UserMapper {
 
     int updataById(User user);
 
+    String selectBirth(int cardid);
+
 }

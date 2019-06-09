@@ -1,5 +1,6 @@
 package com.aimei.beautyshop.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,6 +13,7 @@ public class User {
 
     private String userphone;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date userbirth;
 
     private String useremail;

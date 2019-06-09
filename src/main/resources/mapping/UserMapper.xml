@@ -152,4 +152,10 @@
       useremail=#{useremail}
       where userid=#{userid}
   </update>
+
+  <select id="selectBirth" parameterType="int" resultType="string">
+    select userbirth from t_user
+    where cardid=#{cardid}
+  </select>
+
 </mapper>

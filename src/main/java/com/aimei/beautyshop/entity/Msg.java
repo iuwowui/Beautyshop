@@ -1,5 +1,7 @@
 package com.aimei.beautyshop.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Msg {
@@ -9,6 +11,7 @@ public class Msg {
 
     private String msgstatus;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" ,timezone="GMT+8")
     private Date msgtime;
 
     private Integer userid;
