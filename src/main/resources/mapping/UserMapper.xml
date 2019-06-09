@@ -144,7 +144,7 @@
        from t_user where userid=#{userid}
   </select>
 
-  <update id="updataById" parameterType="com.aimei.beautyshop.entity.User">
+  <update id="updataById" parameterType="map">
       update t_user
       set realname=#{realname},
       userphone=#{userphone},
@@ -156,6 +156,12 @@
   <select id="selectBirth" parameterType="int" resultType="string">
     select userbirth from t_user
     where cardid=#{cardid}
+  </select>
+
+  <select id="selectMsgTime" parameterType="int" resultType="string">
+    select c.drawtime from t_user u INNER JOIN
+    t_card c on u.cardid=c.cardid where u.userid
+    =#{userid}
   </select>
 
 </mapper>

@@ -18,7 +18,7 @@ public class MsgController {
     @CrossOrigin
     @ApiOperation(value = "新增消息",notes = "这是一个新增消息的功能")
     @RequestMapping(value = "msg/add.do",method = RequestMethod.POST)
-    JsonBean addMsg(@RequestBody Msg msg){
-        return JsonBean.setOK("OK",msgService.addMsg(msg));
+    JsonBean addMsg(Integer userid ){
+        return JsonBean.setOK("OK",msgService.addMsg(userid));
     }
 }

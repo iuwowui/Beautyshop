@@ -5,5 +5,5 @@ import com.aimei.beautyshop.vo.JsonBean;
 
 public interface MsgService {
 
-    JsonBean addMsg(Msg msg);
+    JsonBean addMsg(Integer userid);
 }

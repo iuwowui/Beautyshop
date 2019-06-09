@@ -5,7 +5,7 @@ import com.aimei.beautyshop.entity.Msg;
 public interface MsgMapper {
     int deleteByPrimaryKey(Integer msgid);
 
-    int insert(Msg record);
+    int insert(Msg msg);
 
     int insertSelective(Msg record);
 

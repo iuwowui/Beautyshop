@@ -19,7 +19,7 @@ public class CouponController {
     @CrossOrigin
     @ApiOperation(value = "新增优惠券",notes = "这是一个新增优惠券的操作")
     @RequestMapping(value = "coupon/add.do",method = RequestMethod.POST)
-    JsonBean addCoupon(@RequestBody Coupon coupon){
-        return JsonBean.setOK("OK",couponService.addCoupon(coupon));
+    JsonBean addCoupon(int userid){
+        return JsonBean.setOK("OK",couponService.addCoupon(userid));
     }
 }

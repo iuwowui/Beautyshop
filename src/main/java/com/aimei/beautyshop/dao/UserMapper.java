@@ -1,6 +1,9 @@
 package com.aimei.beautyshop.dao;
 
 import com.aimei.beautyshop.entity.User;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userid);
@@ -17,8 +20,9 @@ public interface UserMapper {
 
     User selectById(int userid);
 
-    int updataById(User user);
+    int updataById(@Param("userid") int userid,@Param("realname")String realname, @Param("userphone") String userphone, @Param("userbirth") Date userbirth,@Param("useremail") String useremail);
 
     String selectBirth(int cardid);
 
+    String selectMsgTime(int userid);
 }

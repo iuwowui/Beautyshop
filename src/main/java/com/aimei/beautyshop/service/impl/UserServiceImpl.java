@@ -4,8 +4,11 @@ import com.aimei.beautyshop.dao.UserMapper;
 import com.aimei.beautyshop.entity.User;
 import com.aimei.beautyshop.service.UserService;
 import com.aimei.beautyshop.vo.JsonBean;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,8 +26,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public JsonBean updateUserInfo(User user) {
-        if (userMapper.updataById(user) > 0) {
+    public JsonBean updateUserInfo(int userid, String realname, String userphone, Date userbirth, String useremail) {
+        if (userMapper.updataById(userid,realname,userphone,userbirth,  useremail) > 0) {
             return JsonBean.setOK();
         } else {
             return JsonBean.setERROR();

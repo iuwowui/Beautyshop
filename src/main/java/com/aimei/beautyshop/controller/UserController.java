@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @Api(value = "用户操作",tags = "用户操作")
 @RestController
 public class UserController {
@@ -27,7 +29,7 @@ public class UserController {
     @CrossOrigin
     @ApiOperation(value = "用户信息修改",notes = "这是一个实现完善用户信息的功能")
     @RequestMapping(value = "user/update.do",method = RequestMethod.PUT)
-    public JsonBean update(@RequestBody User user){
-        return JsonBean.setOK("OK",userService.updateUserInfo(user));
+    public JsonBean update(int userid,String realname, String userphone, Date userbirth, String useremail){
+        return JsonBean.setOK("OK",userService.updateUserInfo(userid,realname,userphone,userbirth,  useremail));
     }
 }

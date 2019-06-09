@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.aimei.beautyshop.entity.Msg">
     <id column="msgid" jdbcType="INTEGER" property="msgid" />
     <result column="msgcontent" jdbcType="VARCHAR" property="msgcontent" />
-    <result column="msgstatus" jdbcType="VARCHAR" property="msgstatus" />
+    <result column="msgstatus" jdbcType="INTEGER" property="msgstatus" />
     <result column="msgtime" jdbcType="TIMESTAMP" property="msgtime" />
     <result column="userid" jdbcType="INTEGER" property="userid" />
   </resultMap>
@@ -24,7 +24,7 @@
   <insert id="insert" parameterType="com.aimei.beautyshop.entity.Msg">
     insert into t_msg (msgid, msgcontent, msgstatus, 
       msgtime, userid)
-    values (#{msgid,jdbcType=INTEGER}, #{msgcontent,jdbcType=VARCHAR}, #{msgstatus,jdbcType=VARCHAR}, 
+    values (#{msgid,jdbcType=INTEGER}, #{msgcontent,jdbcType=VARCHAR}, #{msgstatus,jdbcType=INTEGER},
       #{msgtime,jdbcType=TIMESTAMP}, #{userid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.aimei.beautyshop.entity.Msg">
@@ -54,7 +54,7 @@
         #{msgcontent,jdbcType=VARCHAR},
       </if>
       <if test="msgstatus != null">
-        #{msgstatus,jdbcType=VARCHAR},
+        #{msgstatus,jdbcType=INTEGER},
       </if>
       <if test="msgtime != null">
         #{msgtime,jdbcType=TIMESTAMP},
@@ -71,7 +71,7 @@
         msgcontent = #{msgcontent,jdbcType=VARCHAR},
       </if>
       <if test="msgstatus != null">
-        msgstatus = #{msgstatus,jdbcType=VARCHAR},
+        msgstatus = #{msgstatus,jdbcType=INTEGER},
       </if>
       <if test="msgtime != null">
         msgtime = #{msgtime,jdbcType=TIMESTAMP},
@@ -85,7 +85,7 @@
   <update id="updateByPrimaryKey" parameterType="com.aimei.beautyshop.entity.Msg">
     update t_msg
     set msgcontent = #{msgcontent,jdbcType=VARCHAR},
-      msgstatus = #{msgstatus,jdbcType=VARCHAR},
+      msgstatus = #{msgstatus,jdbcType=INTEGER},
       msgtime = #{msgtime,jdbcType=TIMESTAMP},
       userid = #{userid,jdbcType=INTEGER}
     where msgid = #{msgid,jdbcType=INTEGER}
