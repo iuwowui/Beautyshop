@@ -14,7 +14,7 @@
 
   <select id="findGoodsByType" parameterType="int" resultMap="vGoods">
     select g.goodsid,g.goodsname,g.goodssales,g.goodsevaluate,i.imgpath from t_goods g
-    inner join t_goodsimg i
+    left join t_goodsimg i
     on i.goodsid = g.goodsid
     where typeid = #{typeid}
     order by g.goodssales desc
@@ -22,7 +22,7 @@
 
   <select id="findGoodsByCon" parameterType="map" resultMap="vGoods">
     select g.goodsid,g.goodsname,g.goodssales,g.goodsevaluate,i.imgpath from t_goods g
-    inner join t_goodsimg i
+    left join t_goodsimg i
     on i.goodsid = g.goodsid
     where typeid = #{typeid}
     <if test="goodsName != null">
